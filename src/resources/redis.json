@@ -1,0 +1,35 @@
+{
+    "title": "redis",
+    "description":"type--(1:判断题，2：选择题,3：填空题)\r\n answer--",
+    "groups": [
+      {
+        "titile": "入门",
+        "questions": [
+          {
+            "type": 3,
+            "title": "Redis中的5种数据结构类型是{}、{}、{}、{}、{}。",
+            "answer": {
+               "value":["STRING", "LIST", "SET", "ZSET", "HASH"],
+               "ignoreCase":true,
+               "ignoreOrder":true
+            }
+          },
+          {
+              "type": 3,
+              "title": "STRING自增的命令是{}。",
+              "answer": {
+                  "value":["STRING", "LIST", "SET", "ZSET", "HASH"],
+                  "ignoreCase":true,
+                  "ignoreOrder":true
+               }
+          },
+          {
+              "type": 1,
+              "title": "STRING自减的命令是{}。",
+              "answer": ["DECR"]
+          }
+        ]
+      }
+    ]
+  }
+  
