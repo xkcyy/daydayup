@@ -1,0 +1,1 @@
+<swiper class="swiper" duration="{{b}}" current="{{c}}" disable-programmatic-animation="{{true}}" bindchange="{{d}}" bindanimationfinish="{{e}}"><swiper-item wx:for="{{a}}" wx:for-item="item" wx:key="d"><view><slot name="{{item.a}}"></slot><text>{{item.c}}</text></view></swiper-item></swiper>

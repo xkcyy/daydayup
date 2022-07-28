@@ -1,9 +1,18 @@
 {
   "name": "uni-preset-vue",
   "version": "0.0.0",
+  "easycom": {
+		"autoscan": true,
+		"custom": {
+			"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+		}
+	},
   "scripts": {
     "dev:h5": "uni" ,
-    "build:h5": "uni build" 
+    "dev:weixin": "uni" ,
+    "build:h5": "uni build" ,
+    "dev:mp-weixin": "uni -p mp-weixin",
+    "build:mp-weixin": "uni build -p mp-weixin"
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-alpha-3040820220424001",

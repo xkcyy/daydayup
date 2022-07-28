@@ -10,7 +10,7 @@
     <swiper-item v-for="(item, index) in innerSwiperList" :key="index">
       <view>
         <slot
-          v-bind="{ item, index: innerSwiperRangeStartIndex + index }"
+          v-bind:context="{ item, index: innerSwiperRangeStartIndex + index }"
         ></slot>
         <text>{{(function(){test(item, index)})()}}</text>
       </view>

@@ -2,217 +2,217 @@
     "random": true,
     "questions": [
       {
-        "title":"测试客户端与Redis的连接是否正常的命令是____。",
+        "title":"测试客户端与redis的连接是否正常的命令是____。",
         "type":3,
-        "answer":"PING"
+        "answer":"ping"
       },
       {
-        "title":"测试客户端与Redis的连接是否正常时，如果连接正常会收到回复是____。",
+        "title":"测试客户端与redis的连接是否正常时，如果连接正常会收到回复是____。",
         "type":3,
-        "answer":"PONG"
+        "answer":"pong"
       },
       {
-        "title":"REDIS返回空值时显示值为____。",
+        "title":"redis返回空值时显示值为____。",
         "type":3,
-        "answer":"NIL"
+        "answer":"nil"
       },
       {
-        "title": "REDIS 默认的数据库数量为____。",
+        "title": "redis 默认的数据库数量为____。",
         "type": 3,
         "answer": "16"
       },
       {
-        "title": "REDIS默认选择的数据库名称为____。",
+        "title": "redis默认选择的数据库名称为____。",
         "type": 3,
         "answer": "0"
       },
       {
-        "title": "获取Redis中的所有键使用的命令为_____",
+        "title": "获取redis中的所有键使用的命令为_____",
         "type": 3,
-        "answer": "KEYS *"
+        "answer": "keys *"
       },
       {
-        "title": "查询REDIS中键bar是否存在使用的命令为_____",
+        "title": "查询redis中键bar是否存在使用的命令为_____",
         "type": 3,
-        "answer": "EXISTS bar"
+        "answer": "exists bar"
       },
       {
-        "title": "删除REDIS中键bar时使用的命令为_____",
+        "title": "删除redis中键bar时使用的命令为_____",
         "type": 3,
-        "answer": "DEL bar"
+        "answer": "del bar"
       },
       {
-        "title": "获取REDIS中键bar对应的类型时使用的命令为_____",
+        "title": "获取redis中键bar对应的类型时使用的命令为_____",
         "type": 3,
-        "answer": "TYPE bar"
+        "answer": "type bar"
       },
       {
-        "title": "REDIS中字符类型最大存储长度为_____MB。",
+        "title": "redis中字符类型最大存储长度为_____mb。",
         "type": 3,
         "answer": "512"
       },
       {
-        "title": "获取REDIS中字符类型的键bar的值使用的命令为_____。",
+        "title": "获取redis中字符类型的键bar的值使用的命令为_____。",
         "type": 3,
-        "answer": "GET bar"
+        "answer": "get bar"
       },
       {
-        "title": "将REDIS中的键bar的值设置为1的命令为_____。",
+        "title": "将redis中的键bar的值设置为1的命令为_____。",
         "type": 3,
-        "answer": "SET bar 1"
+        "answer": "set bar 1"
       },
       {
-        "title": "将REDIS中的键bar的值自增1的命令为_____。",
+        "title": "将redis中的键bar的值自增1的命令为_____。",
         "type": 3,
-        "answer": "INCR bar"
+        "answer": "incr bar"
       },
       {
-        "title": "将REDIS中的键bar的值自增2的命令为_____。",
+        "title": "将redis中的键bar的值自增2的命令为_____。",
         "type": 3,
-        "answer": "INCRBY bar 2"
+        "answer": "incrby bar 2"
       },
       {
-        "title": "将REDIS中的键bar的值自减1的命令为_____。",
+        "title": "将redis中的键bar的值自减1的命令为_____。",
         "type": 3,
-        "answer": "DECR bar"
+        "answer": "decr bar"
       },
       {
-        "title": "将REDIS中的键bar的值自减2的命令为_____。",
+        "title": "将redis中的键bar的值自减2的命令为_____。",
         "type": 3,
-        "answer": "DECRBY bar 2"
+        "answer": "decrby bar 2"
       },
       {
-        "title": "将REDIS中的键bar的值自增2.5的命令为_____。",
+        "title": "将redis中的键bar的值自增2.5的命令为_____。",
         "type": 3,
-        "answer": "INCRBYFLOAT bar 2.5"
+        "answer": "incrbyfloat bar 2.5"
       },
       {
-        "title": "在REDIS中,在键bar的内容最后追加ss使用的命令为_____。",
+        "title": "在redis中,在键bar的内容最后追加ss使用的命令为_____。",
         "type": 3,
-        "answer": "APPEND bar ss"
+        "answer": "append bar ss"
       },
       {
-        "title": "在REDIS中,获取字符类型的键bar的内容的长度使用的命令为_____。",
+        "title": "在redis中,获取字符类型的键bar的内容的长度使用的命令为_____。",
         "type": 3,
-        "answer": "STRLEN bar"
+        "answer": "strlen bar"
       },
       {
-        "title": "在REDIS中,中文字符对应的长度为_____。",
+        "title": "在redis中,中文字符对应的长度为_____。",
         "type": 3,
         "answer": "3"
       },
       {
-        "title": "在REDIS中,同时将键key1的值设置为s1,键key2的值设置s2的命令为_____。",
+        "title": "在redis中,同时将键key1的值设置为s1,键key2的值设置s2的命令为_____。",
         "type": 3,
-        "answer": "MSET key1 s1 key2 s2"
+        "answer": "mset key1 s1 key2 s2"
       },
       {
-        "title": "在REDIS中,一次同时获得键key1，key2的值的命令为_____。",
+        "title": "在redis中,一次同时获得键key1，key2的值的命令为_____。",
         "type": 3,
-        "answer": "MGET key1 key2"
+        "answer": "mget key1 key2"
       },
       {
-        "title": "在REDIS中,将对象{a:1,b:2}创建为散列表(键key1)的命令为_____。",
+        "title": "在redis中,将对象{a:1,b:2}创建为散列表(键key1)的命令为_____。",
         "type": 3,
-        "answer": "HMSET key1 a 1 b 2"
+        "answer": "hmset key1 a 1 b 2"
       },
       {
-        "title": "在REDIS中,散列表key1存储了对象{a:1,b:2,c:3}，同时获取a，b字段的命令为_____。",
+        "title": "在redis中,散列表key1存储了对象{a:1,b:2,c:3}，同时获取a，b字段的命令为_____。",
         "type": 3,
-        "answer": "HMGET key1 a b"
+        "answer": "hmget key1 a b"
       },
       {
-        "title": "在REDIS中,一次获取散列表key1存储的所有字段值的命令为_____。",
+        "title": "在redis中,一次获取散列表key1存储的所有字段值的命令为_____。",
         "type": 3,
-        "answer": "HGETALL key1"
+        "answer": "hgetall key1"
       },
       {
-        "title": "在REDIS中,判断散列表key1是否存在字段a的命令为_____。",
+        "title": "在redis中,判断散列表key1是否存在字段a的命令为_____。",
         "type": 3,
-        "answer": "HEXISTS key1 a"
+        "answer": "hexists key1 a"
       },
       {
-        "title": "在REDIS中,若散列表key1不存在字段a则将a的值设置为1，若存在则不处理的命令为_____。",
+        "title": "在redis中,若散列表key1不存在字段a则将a的值设置为1，若存在则不处理的命令为_____。",
         "type": 3,
-        "answer": "HSETNX key1 a 1"
+        "answer": "hsetnx key1 a 1"
       },
       {
-        "title": "在REDIS中,将散列表key1的字段a值自增的命令为_____。",
+        "title": "在redis中,将散列表key1的字段a值自增的命令为_____。",
         "type": 3,
-        "answer": "HINCRBY key1 a 1"
+        "answer": "hincrby key1 a 1"
       },
       {
-        "title": "在REDIS中,将散列表key1的字段a,b删除的命令为_____。",
+        "title": "在redis中,将散列表key1的字段a,b删除的命令为_____。",
         "type": 3,
-        "answer": "HDEL key1 a b"
+        "answer": "hdel key1 a b"
       },{
-        "title": "在REDIS中,获取散列表key1所有的字段的命令为_____。",
+        "title": "在redis中,获取散列表key1所有的字段的命令为_____。",
         "type": 3,
-        "answer": "HKEYS key1"
+        "answer": "hkeys key1"
       },{
-        "title": "在REDIS中,获取散列表key1所有的值的命令为_____。",
+        "title": "在redis中,获取散列表key1所有的值的命令为_____。",
         "type": 3,
-        "answer": "HVALS key1"
+        "answer": "hvals key1"
       },{
-        "title": "在REDIS中,获取散列表key1的字段总数的命令为_____。",
+        "title": "在redis中,获取散列表key1的字段总数的命令为_____。",
         "type": 3,
-        "answer": "HLEN key1"
+        "answer": "hlen key1"
       },{
-        "title": "在REDIS中,向列表key1的头部添加的元素1的命令为_____。",
+        "title": "在redis中,向列表key1的头部添加的元素1的命令为_____。",
         "type": 3,
-        "answer": "LPUSH key1 1"
+        "answer": "lpush key1 1"
       },{
-        "title": "在REDIS中,向列表key1的尾部添加的元素1的命令为_____。",
+        "title": "在redis中,向列表key1的尾部添加的元素1的命令为_____。",
         "type": 3,
-        "answer": "RPUSH key1 1"
+        "answer": "rpush key1 1"
       },{
-        "title": "在REDIS中,从列表key1的头部取出一个元素的命令为_____。",
+        "title": "在redis中,从列表key1的头部取出一个元素的命令为_____。",
         "type": 3,
-        "answer": "LPOP key1"
+        "answer": "lpop key1"
       },{
-        "title": "在REDIS中,获取列表key1元素个数的命令为_____。",
+        "title": "在redis中,获取列表key1元素个数的命令为_____。",
         "type": 3,
-        "answer": "LLEN key1"
+        "answer": "llen key1"
       },{
-        "title": "在REDIS中,获取列表前10个元素的命令为_____。",
+        "title": "在redis中,获取列表前10个元素的命令为_____。",
         "type": 3,
-        "answer": "LRANGE 0 9"
+        "answer": "lrange 0 9"
       },{
-        "title": "在REDIS中,获取列表最后10个元素的命令为_____。",
+        "title": "在redis中,获取列表最后10个元素的命令为_____。",
         "type": 3,
-        "answer": "LRANGE -10 -1"
+        "answer": "lrange -10 -1"
       },{
-        "title": "在REDIS中,获取列表所有元素的命令为_____。",
+        "title": "在redis中,获取列表所有元素的命令为_____。",
         "type": 3,
-        "answer": "LRANGE 0  -1"
+        "answer": "lrange 0  -1"
       },{
-        "title": "在REDIS中,删除列表key1中前3个值为1的命令为_____。",
+        "title": "在redis中,删除列表key1中前3个值为1的命令为_____。",
         "type": 3,
-        "answer": "LREM key1 3 1"
+        "answer": "lrem key1 3 1"
       },{
-        "title": "在REDIS中,删除列表key1中最后3个值为1的命令为_____。",
+        "title": "在redis中,删除列表key1中最后3个值为1的命令为_____。",
         "type": 3,
-        "answer": "LREM key1 -3 1"
+        "answer": "lrem key1 -3 1"
       },{
-        "title": "在REDIS中,删除列表key1中所有值为1的命令为_____。",
+        "title": "在redis中,删除列表key1中所有值为1的命令为_____。",
         "type": 3,
-        "answer": "LREM key1 0 1"
+        "answer": "lrem key1 0 1"
       },{
-        "title": "在REDIS中,获取列表key1中的第二个元素的值的命令为_____。",
+        "title": "在redis中,获取列表key1中的第二个元素的值的命令为_____。",
         "type": 3,
-        "answer": "LINDEX key1 1"
+        "answer": "lindex key1 1"
       },{
-        "title": "在REDIS中,设置列表key1中的第二个元素的值为1的命令为_____。",
+        "title": "在redis中,设置列表key1中的第二个元素的值为1的命令为_____。",
         "type": 3,
-        "answer": "LSET key1 1 1"
+        "answer": "lset key1 1 1"
       },{
-        "title": "在REDIS中,获取列表key1中的倒数第二个元素的值的命令为_____。",
+        "title": "在redis中,获取列表key1中的倒数第二个元素的值的命令为_____。",
         "type": 3,
-        "answer": "LINDEX key1 -2"
+        "answer": "lindex key1 -2"
       },{
-        "title": "在REDIS中,限制列表key1中元素个数不超过100（多余删除）的命令为_____。",
+        "title": "在redis中,限制列表key1中元素个数不超过100（多余删除）的命令为_____。",
         "type": 3,
-        "answer": "LTRIM key1 0 99"
+        "answer": "ltrim key1 0 99"
       }
       
       

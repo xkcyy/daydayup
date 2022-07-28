@@ -1,42 +1,42 @@
 <template>
   <view class="container">
     <DSwiper :data-source="dataSource" v-model:current="current" @change="handleChange">
-      <template #default="{ item, index }">
+      <template #default="{ context }">
         <scroll-view scroll-y="true" class="swiper-scroll">
           <view class="topic-content">
-            <template v-if="item.type == 3">
+            <template v-if="context.item.type == 3">
               <view class="title">
 
                 <uni-tag size="small" text="填空题" type="primary" style="margin-right: 20rpx;" />
                 <!-- <text class="index">{{index+1}}、</text> -->
-                <text>{{ item.title }}</text>
+                <text>{{ context.item.title }}</text>
               </view>
               <view class="answer-input">
-                <view v-if="index % 2">
-                  <uni-easyinput :disabled="item.filled" v-model="item.answerResult" placeholder=""
-                    @confirm="handleInputConfirm(item, index)" />
+                <view v-if="context.index % 2">
+                  <uni-easyInput :disabled="context.item.filled" v-model="context.item.answerResult" placeholder=""
+                    @confirm="handleInputConfirm(context.item, context.index)" />
                 </view>
-                <uni-easyinput v-else :disabled="item.filled" v-model="item.answerResult" placeholder=""
-                  @confirm="handleInputConfirm(item, index)" />
+                <uni-easyInput v-else :disabled="context.item.filled" v-model="context.item.answerResult" placeholder=""
+                  @confirm="handleInputConfirm(context.item, context.index)" />
               </view>
-              <view v-if="item.filled">
+              <view v-if="context.item.filled">
                 <view style="display:flex">
                   <view style="width:80rpx;flex:none;height:80rpx;line-height: 80rpx;">
-                    <view v-if="item.filled">
-                      <uni-icons v-if="!item.answerCorrect" type="clear" size="38" color="#f84d27"></uni-icons>
+                    <view v-if="context.item.filled">
+                      <uni-icons v-if="!context.item.answerCorrect" type="clear" size="38" color="#f84d27"></uni-icons>
                       <uni-icons v-else type="checkbox-filled" size="38" color="#18bc37"></uni-icons>
                     </view>
                   </view>
                   <view class="answer-result" style="flex:1">
                     <text>答案</text>
-                    <text style="color: #0089ff;font-weight: bold;padding: 0 20rpx;">{{ item.answer }}</text>
+                    <text style="color: #0089ff;font-weight: bold;padding: 0 20rpx;">{{ context.item.answer }}</text>
                   </view>
                 </view>
 
               </view>
-              <view class="answer-doubt" v-if="item.filled && item.answerResult">
+              <view class="answer-doubt" v-if="context.item.filled && context.item.answerResult">
                 <text style="font-weight: bold;">题目解析：</text>
-                <text>{{ item.answerDoubt }}</text>
+                <text>{{ context.item.answerDoubt }}</text>
               </view>
 
             </template>
@@ -46,14 +46,14 @@
     </DSwiper>
     <view class="panel-bottom">
       <view class="count-result">
-        <view>
+        <view class="item">
           <uni-icons type="checkbox-filled" size="18" color="#0089ff"></uni-icons>
         </view>
         <view class="success-num" style="padding-left: 10rpx;margin-right: 30rpx;">{{ countResult.success }}</view>
-        <view>
+        <view class="item">
           <uni-icons type="clear" size="18" color="#f84d27"></uni-icons>
         </view>
-        <view class="error-num" style="padding-left: 10rpx;">{{ countResult.error }}</view>
+        <view class="item error-num" style="padding-left: 10rpx;">{{ countResult.error }}</view>
       </view>
     </view>
   </view>
@@ -81,13 +81,13 @@ onMounted(() => {
     success: (res: any) => {
       const arr = res.data.questions as Array<TestingQuestion>
       for (let i = 0; i < arr.length; i++) {
-        const idx = Math.ceil((Math.random() * (arr.length - i))) % (arr.length - i)+i
+        const idx = Math.ceil((Math.random() * (arr.length - i))) % (arr.length - i) + i
         // 交换i与idx
         const newValue = arr[idx]
         arr[idx] = arr[i]
         arr[i] = newValue;
       }
-      dataSource.value =arr
+      dataSource.value = arr
       handleChange(null)
     }
   })
@@ -201,7 +201,7 @@ page {
   .count-result {
     display: inline-block;
 
-    * {
+    .item {
       display: inline-block;
     }
   }
