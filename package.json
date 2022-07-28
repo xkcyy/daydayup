@@ -2,7 +2,8 @@
   "name": "uni-preset-vue",
   "version": "0.0.0",
   "scripts": {
-    "dev:h5": "uni"
+    "dev:h5": "uni" ,
+    "build:h5": "uni build" 
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-alpha-3040820220424001",
