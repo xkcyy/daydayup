@@ -7,9 +7,9 @@
     @change="handleSwiperChange"
     @animationfinish="handleSwiperAnimationFinish"
   >
-    <swiper-item v-for="(item, index) in innerSwiperList" :key="index">
+    <swiper-item v-for="(item, index) in innerSwiperList" :key="item.id">
       <view>
-        <slot
+        <slot name="default"
           v-bind:context="{ item, index: innerSwiperRangeStartIndex + index }"
         ></slot>
         <text>{{(function(){test(item, index)})()}}</text>
@@ -67,10 +67,10 @@ const renderSwiper = (index: number) => {
     innerSwiperIndex.value = current;
     innerSwiperRangeStartIndex.value = index - current;
     console.log('cur page will be ',list[current])
-    setTimeout(() => {
-      duration.value = 200;
-    }, 50);
-  }, 20);
+    // setTimeout(() => {
+    //   duration.value = 200;
+    // }, 100);
+  }, 2000);
 };
 watchEffect(() => {
   const ds = props.dataSource;

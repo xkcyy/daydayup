@@ -11,6 +11,7 @@ export interface Question{
      * @type {number}
      * @memberof Question
      */
+     id:string|number
      type: 1|2|3
      title:string
      answer:string

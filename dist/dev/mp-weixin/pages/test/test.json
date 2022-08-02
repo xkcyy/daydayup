@@ -4,6 +4,6 @@
     "uni-tag": "../../node-modules/@dcloudio/uni-ui/lib/uni-tag/uni-tag",
     "uni-easy-input": "../../node-modules/@dcloudio/uni-ui/lib/uni-easyInput/uni-easyInput",
     "uni-icons": "../../node-modules/@dcloudio/uni-ui/lib/uni-icons/uni-icons",
-    "d-swiper": "../../components/d-swiper/d-swiper"
+    "d-swiper3": "../../components/d-swiper/d-swiper3"
   }
 }

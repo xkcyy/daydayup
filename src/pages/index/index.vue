@@ -47,9 +47,10 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
+
+
 const t = ref(0);
 const swiperList = ref([{a:1}])
-
 
 
 const subjects = [

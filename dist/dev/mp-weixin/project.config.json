@@ -4,8 +4,11 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": false,
-    "es6": true
+    "urlCheck": true,
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "minifyWXSS": true
   },
   "compileType": "miniprogram",
   "libVersion": "",

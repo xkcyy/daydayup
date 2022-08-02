@@ -41,10 +41,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         innerSwiperIndex.value = current;
         innerSwiperRangeStartIndex.value = index - current;
         console.log("cur page will be ", list[current]);
-        setTimeout(() => {
-          duration.value = 200;
-        }, 50);
-      }, 20);
+      }, 2e3);
     };
     common_vendor.watchEffect(() => {
       props.dataSource;
@@ -84,7 +81,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             c: common_vendor.t(function() {
               test(item, index);
             }()),
-            d: index
+            d: item.id
           };
         }),
         b: duration.value,

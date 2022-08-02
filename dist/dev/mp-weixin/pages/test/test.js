@@ -10,9 +10,9 @@ const _easycom_uni_tag = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-tag/
 const _easycom_uni_easyInput = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-easyInput/uni-easyInput.js";
 const _easycom_uni_icons = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-icons/uni-icons.js";
 if (!Math) {
-  (_easycom_uni_tag + _easycom_uni_easyInput + _easycom_uni_icons + DSwiper)();
+  (_easycom_uni_tag + _easycom_uni_easyInput + _easycom_uni_icons + DSwiper3)();
 }
-const DSwiper = () => "../../components/d-swiper/d-swiper.js";
+const DSwiper3 = () => "../../components/d-swiper/d-swiper3.js";
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   setup(__props) {
     const dataSource = common_vendor.ref(new Array());
@@ -25,7 +25,8 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     common_vendor.onMounted(() => {
       const routes = getCurrentPages();
       const route = routes[routes.length - 1];
-      const url = route.$page.options.url;
+      const url = decodeURIComponent((route.options || route.$page.options).url);
+      common_vendor.index.showLoading({ title: "\u52A0\u8F7D\u4E2D..." });
       common_vendor.index.request({
         url,
         success: (res) => {
@@ -35,9 +36,14 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             const newValue = arr[idx];
             arr[idx] = arr[i];
             arr[i] = newValue;
+            newValue.id = 100 + i;
           }
           dataSource.value = arr;
+          common_vendor.index.hideLoading();
           handleChange();
+        },
+        fail: () => {
+          common_vendor.index.hideLoading();
         }
       });
     });
@@ -65,10 +71,10 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       };
     });
     return (_ctx, _cache) => {
-      return {
-        a: common_vendor.w(({
-          context
-        }, s0, i0) => {
+      return common_vendor.e({
+        a: dataSource.value.length
+      }, dataSource.value.length ? {
+        b: common_vendor.w((context, s0, i0) => {
           return common_vendor.e({
             a: context.item.type == 3
           }, context.item.type == 3 ? common_vendor.e({
@@ -78,80 +84,78 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
               text: "\u586B\u7A7A\u9898",
               type: "primary"
             }),
-            d: common_vendor.t(context.item.title),
-            e: context.index % 2
+            d: common_vendor.t(context.index + 1),
+            e: common_vendor.t(context.item.title),
+            f: context.index % 2
           }, context.index % 2 ? {
-            f: common_vendor.o(($event) => handleInputConfirm(context.item, context.index)),
-            g: "2664db0e-2-" + i0 + ",2664db0e-0",
-            h: common_vendor.o(($event) => context.item.answerResult = $event),
-            i: common_vendor.p({
+            g: common_vendor.o(($event) => handleInputConfirm(context.item, context.index)),
+            h: "2664db0e-2-" + i0 + ",2664db0e-0",
+            i: common_vendor.o(($event) => context.item.answerResult = $event),
+            j: common_vendor.p({
               disabled: context.item.filled,
               placeholder: "",
               modelValue: context.item.answerResult
             })
           } : {
-            j: common_vendor.o(($event) => handleInputConfirm(context.item, context.index)),
-            k: "2664db0e-3-" + i0 + ",2664db0e-0",
-            l: common_vendor.o(($event) => context.item.answerResult = $event),
-            m: common_vendor.p({
+            k: common_vendor.o(($event) => handleInputConfirm(context.item, context.index)),
+            l: "2664db0e-3-" + i0 + ",2664db0e-0",
+            m: common_vendor.o(($event) => context.item.answerResult = $event),
+            n: common_vendor.p({
               disabled: context.item.filled,
               placeholder: "",
               modelValue: context.item.answerResult
             })
           }, {
-            n: context.item.filled
-          }, context.item.filled ? common_vendor.e({
             o: context.item.filled
           }, context.item.filled ? common_vendor.e({
-            p: !context.item.answerCorrect
+            p: context.item.filled
+          }, context.item.filled ? common_vendor.e({
+            q: !context.item.answerCorrect
           }, !context.item.answerCorrect ? {
-            q: "2664db0e-4-" + i0 + ",2664db0e-0",
-            r: common_vendor.p({
+            r: "2664db0e-4-" + i0 + ",2664db0e-0",
+            s: common_vendor.p({
               type: "clear",
               size: "38",
               color: "#f84d27"
             })
           } : {
-            s: "2664db0e-5-" + i0 + ",2664db0e-0",
-            t: common_vendor.p({
+            t: "2664db0e-5-" + i0 + ",2664db0e-0",
+            v: common_vendor.p({
               type: "checkbox-filled",
               size: "38",
               color: "#18bc37"
             })
           }) : {}, {
-            v: common_vendor.t(context.item.answer)
+            w: common_vendor.t(context.item.answer)
           }) : {}, {
-            w: context.item.filled && context.item.answerResult
+            x: context.item.filled && context.item.answerResult
           }, context.item.filled && context.item.answerResult ? {
-            x: common_vendor.t(context.item.answerDoubt)
+            y: common_vendor.t(context.item.answerDoubt)
           } : {}) : {}, {
-            y: i0,
-            z: s0
+            z: i0,
+            A: s0
           });
         }, {
           name: "d",
-          path: "a",
+          path: "b",
           vueId: "2664db0e-0"
         }),
-        b: dataSource.value,
-        c: common_vendor.o(handleChange),
-        d: common_vendor.o(($event) => current.value = $event),
-        e: common_vendor.p({
-          current: current.value
+        c: common_vendor.p({
+          list: dataSource.value
         }),
-        f: common_vendor.p({
+        d: common_vendor.p({
           type: "checkbox-filled",
           size: "18",
           color: "#0089ff"
         }),
-        g: common_vendor.t(common_vendor.unref(countResult).success),
-        h: common_vendor.p({
+        e: common_vendor.t(common_vendor.unref(countResult).success),
+        f: common_vendor.p({
           type: "clear",
           size: "18",
           color: "#f84d27"
         }),
-        i: common_vendor.t(common_vendor.unref(countResult).error)
-      };
+        g: common_vendor.t(common_vendor.unref(countResult).error)
+      } : {});
     };
   }
 });

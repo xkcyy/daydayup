@@ -1,15 +1,14 @@
 <template>
-  <view class="container">
-    <DSwiper :data-source="dataSource" v-model:current="current" @change="handleChange">
-      <template #default="{ context }">
+  <view class="container" v-if="dataSource.length">
+    <DSwiper3 :list="dataSource">
+      <template #default="context">
         <scroll-view scroll-y="true" class="swiper-scroll">
           <view class="topic-content">
             <template v-if="context.item.type == 3">
               <view class="title">
-
                 <uni-tag size="small" text="填空题" type="primary" style="margin-right: 20rpx;" />
                 <!-- <text class="index">{{index+1}}、</text> -->
-                <text>{{ context.item.title }}</text>
+                <text>{{ context.index + 1 }}. {{ context.item.title }}</text>
               </view>
               <view class="answer-input">
                 <view v-if="context.index % 2">
@@ -43,13 +42,13 @@
           </view>
         </scroll-view>
       </template>
-    </DSwiper>
+    </DSwiper3>
     <view class="panel-bottom">
       <view class="count-result">
         <view class="item">
           <uni-icons type="checkbox-filled" size="18" color="#0089ff"></uni-icons>
         </view>
-        <view class="success-num" style="padding-left: 10rpx;margin-right: 30rpx;">{{ countResult.success }}</view>
+        <view class="item success-num" style="padding-left: 10rpx;margin-right: 30rpx;">{{ countResult.success }}</view>
         <view class="item">
           <uni-icons type="clear" size="18" color="#f84d27"></uni-icons>
         </view>
@@ -61,6 +60,7 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref } from "vue";
 import DSwiper from "../../components/d-swiper/d-swiper.vue";
+import DSwiper3 from '../../components/d-swiper/d-swiper3.vue'
 import { fetchQuestions, TestingQuestion } from "./api";
 const dataSource = ref(new Array<TestingQuestion>());
 const current = ref(0);
@@ -73,12 +73,15 @@ function handleChange(e: any) {
 
 onMounted(() => {
   const routes = getCurrentPages(); // 获取当前打开过的页面路由数组
-  const route = routes[routes.length - 1]
+  const route = routes[routes.length - 1] as any
+  const url = decodeURIComponent((route.options || route.$page.options).url as string)
 
-  const url = ((route as any).$page.options as any).url as string;
+  // const url = ((route as any).$page.options as any).url as string;
+  uni.showLoading({ title: '加载中...' })
   uni.request({
     url: url,
     success: (res: any) => {
+
       const arr = res.data.questions as Array<TestingQuestion>
       for (let i = 0; i < arr.length; i++) {
         const idx = Math.ceil((Math.random() * (arr.length - i))) % (arr.length - i) + i
@@ -86,9 +89,13 @@ onMounted(() => {
         const newValue = arr[idx]
         arr[idx] = arr[i]
         arr[i] = newValue;
+        newValue.id = 100 + i;
       }
       dataSource.value = arr
+      uni.hideLoading()
       handleChange(null)
+    }, fail: () => {
+      uni.hideLoading()
     }
   })
 
