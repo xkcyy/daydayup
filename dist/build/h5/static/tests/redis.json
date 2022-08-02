@@ -1,224 +1,298 @@
 {
-    "random": true,
-    "questions": [
-      {
-        "title":"测试客户端与redis的连接是否正常的命令是____。",
-        "type":3,
-        "answer":"ping"
-      },
-      {
-        "title":"测试客户端与redis的连接是否正常时，如果连接正常会收到回复是____。",
-        "type":3,
-        "answer":"pong"
-      },
-      {
-        "title":"redis返回空值时显示值为____。",
-        "type":3,
-        "answer":"nil"
-      },
-      {
-        "title": "redis 默认的数据库数量为____。",
-        "type": 3,
-        "answer": "16"
-      },
-      {
-        "title": "redis默认选择的数据库名称为____。",
-        "type": 3,
-        "answer": "0"
-      },
-      {
-        "title": "获取redis中的所有键使用的命令为_____",
-        "type": 3,
-        "answer": "keys *"
-      },
-      {
-        "title": "查询redis中键bar是否存在使用的命令为_____",
-        "type": 3,
-        "answer": "exists bar"
-      },
-      {
-        "title": "删除redis中键bar时使用的命令为_____",
-        "type": 3,
-        "answer": "del bar"
-      },
-      {
-        "title": "获取redis中键bar对应的类型时使用的命令为_____",
-        "type": 3,
-        "answer": "type bar"
-      },
-      {
-        "title": "redis中字符类型最大存储长度为_____mb。",
-        "type": 3,
-        "answer": "512"
-      },
-      {
-        "title": "获取redis中字符类型的键bar的值使用的命令为_____。",
-        "type": 3,
-        "answer": "get bar"
-      },
-      {
-        "title": "将redis中的键bar的值设置为1的命令为_____。",
-        "type": 3,
-        "answer": "set bar 1"
-      },
-      {
-        "title": "将redis中的键bar的值自增1的命令为_____。",
-        "type": 3,
-        "answer": "incr bar"
-      },
-      {
-        "title": "将redis中的键bar的值自增2的命令为_____。",
-        "type": 3,
-        "answer": "incrby bar 2"
-      },
-      {
-        "title": "将redis中的键bar的值自减1的命令为_____。",
-        "type": 3,
-        "answer": "decr bar"
-      },
-      {
-        "title": "将redis中的键bar的值自减2的命令为_____。",
-        "type": 3,
-        "answer": "decrby bar 2"
-      },
-      {
-        "title": "将redis中的键bar的值自增2.5的命令为_____。",
-        "type": 3,
-        "answer": "incrbyfloat bar 2.5"
-      },
-      {
-        "title": "在redis中,在键bar的内容最后追加ss使用的命令为_____。",
-        "type": 3,
-        "answer": "append bar ss"
-      },
-      {
-        "title": "在redis中,获取字符类型的键bar的内容的长度使用的命令为_____。",
-        "type": 3,
-        "answer": "strlen bar"
-      },
-      {
-        "title": "在redis中,中文字符对应的长度为_____。",
-        "type": 3,
-        "answer": "3"
-      },
-      {
-        "title": "在redis中,同时将键key1的值设置为s1,键key2的值设置s2的命令为_____。",
-        "type": 3,
-        "answer": "mset key1 s1 key2 s2"
-      },
-      {
-        "title": "在redis中,一次同时获得键key1，key2的值的命令为_____。",
-        "type": 3,
-        "answer": "mget key1 key2"
-      },
-      {
-        "title": "在redis中,将对象{a:1,b:2}创建为散列表(键key1)的命令为_____。",
-        "type": 3,
-        "answer": "hmset key1 a 1 b 2"
-      },
-      {
-        "title": "在redis中,散列表key1存储了对象{a:1,b:2,c:3}，同时获取a，b字段的命令为_____。",
-        "type": 3,
-        "answer": "hmget key1 a b"
-      },
-      {
-        "title": "在redis中,一次获取散列表key1存储的所有字段值的命令为_____。",
-        "type": 3,
-        "answer": "hgetall key1"
-      },
-      {
-        "title": "在redis中,判断散列表key1是否存在字段a的命令为_____。",
-        "type": 3,
-        "answer": "hexists key1 a"
-      },
-      {
-        "title": "在redis中,若散列表key1不存在字段a则将a的值设置为1，若存在则不处理的命令为_____。",
-        "type": 3,
-        "answer": "hsetnx key1 a 1"
-      },
-      {
-        "title": "在redis中,将散列表key1的字段a值自增的命令为_____。",
-        "type": 3,
-        "answer": "hincrby key1 a 1"
-      },
-      {
-        "title": "在redis中,将散列表key1的字段a,b删除的命令为_____。",
-        "type": 3,
-        "answer": "hdel key1 a b"
-      },{
-        "title": "在redis中,获取散列表key1所有的字段的命令为_____。",
-        "type": 3,
-        "answer": "hkeys key1"
-      },{
-        "title": "在redis中,获取散列表key1所有的值的命令为_____。",
-        "type": 3,
-        "answer": "hvals key1"
-      },{
-        "title": "在redis中,获取散列表key1的字段总数的命令为_____。",
-        "type": 3,
-        "answer": "hlen key1"
-      },{
-        "title": "在redis中,向列表key1的头部添加的元素1的命令为_____。",
-        "type": 3,
-        "answer": "lpush key1 1"
-      },{
-        "title": "在redis中,向列表key1的尾部添加的元素1的命令为_____。",
-        "type": 3,
-        "answer": "rpush key1 1"
-      },{
-        "title": "在redis中,从列表key1的头部取出一个元素的命令为_____。",
-        "type": 3,
-        "answer": "lpop key1"
-      },{
-        "title": "在redis中,获取列表key1元素个数的命令为_____。",
-        "type": 3,
-        "answer": "llen key1"
-      },{
-        "title": "在redis中,获取列表前10个元素的命令为_____。",
-        "type": 3,
-        "answer": "lrange 0 9"
-      },{
-        "title": "在redis中,获取列表最后10个元素的命令为_____。",
-        "type": 3,
-        "answer": "lrange -10 -1"
-      },{
-        "title": "在redis中,获取列表所有元素的命令为_____。",
-        "type": 3,
-        "answer": "lrange 0  -1"
-      },{
-        "title": "在redis中,删除列表key1中前3个值为1的命令为_____。",
-        "type": 3,
-        "answer": "lrem key1 3 1"
-      },{
-        "title": "在redis中,删除列表key1中最后3个值为1的命令为_____。",
-        "type": 3,
-        "answer": "lrem key1 -3 1"
-      },{
-        "title": "在redis中,删除列表key1中所有值为1的命令为_____。",
-        "type": 3,
-        "answer": "lrem key1 0 1"
-      },{
-        "title": "在redis中,获取列表key1中的第二个元素的值的命令为_____。",
-        "type": 3,
-        "answer": "lindex key1 1"
-      },{
-        "title": "在redis中,设置列表key1中的第二个元素的值为1的命令为_____。",
-        "type": 3,
-        "answer": "lset key1 1 1"
-      },{
-        "title": "在redis中,获取列表key1中的倒数第二个元素的值的命令为_____。",
-        "type": 3,
-        "answer": "lindex key1 -2"
-      },{
-        "title": "在redis中,限制列表key1中元素个数不超过100（多余删除）的命令为_____。",
-        "type": 3,
-        "answer": "ltrim key1 0 99"
-      }
-      
-      
-      
-      
-      
-    ]
-  }
-  
+  "random": true,
+  "questions": [
+    {
+      "title": "测试客户端与redis的连接是否正常的命令是____。",
+      "type": 3,
+      "answer": "ping"
+    },
+    {
+      "title": "测试客户端与redis的连接是否正常时，如果连接正常会收到回复是____。",
+      "type": 3,
+      "answer": "pong"
+    },
+    {
+      "title": "redis返回空值时显示值为____。",
+      "type": 3,
+      "answer": "nil"
+    },
+    {
+      "title": "redis 默认的数据库数量为____。",
+      "type": 3,
+      "answer": "16"
+    },
+    {
+      "title": "redis默认选择的数据库名称为____。",
+      "type": 3,
+      "answer": "0"
+    },
+    {
+      "title": "获取redis中的所有键使用的命令为_____",
+      "type": 3,
+      "answer": "keys *"
+    },
+    {
+      "title": "查询redis中键k是否存在使用的命令为_____",
+      "type": 3,
+      "answer": "exists k"
+    },
+    {
+      "title": "删除redis中键k时使用的命令为_____",
+      "type": 3,
+      "answer": "del k"
+    },
+    {
+      "title": "获取redis中键k对应的类型时使用的命令为_____",
+      "type": 3,
+      "answer": "type k"
+    },
+    {
+      "title": "redis中字符类型最大存储长度为_____mb。",
+      "type": 3,
+      "answer": "512"
+    },
+    {
+      "title": "获取redis中字符类型的键k的值使用的命令为_____。",
+      "type": 3,
+      "answer": "get k"
+    },
+    {
+      "title": "将redis中的键k的值设置为1的命令为_____。",
+      "type": 3,
+      "answer": "set k 1"
+    },
+    {
+      "title": "将redis中的键k的值自增1的命令为_____。",
+      "type": 3,
+      "answer": "incr k"
+    },
+    {
+      "title": "将redis中的键k的值自增2的命令为_____。",
+      "type": 3,
+      "answer": "incrby k 2"
+    },
+    {
+      "title": "将redis中的键k的值自减1的命令为_____。",
+      "type": 3,
+      "answer": "decr k"
+    },
+    {
+      "title": "将redis中的键k的值自减2的命令为_____。",
+      "type": 3,
+      "answer": "decrby k 2"
+    },
+    {
+      "title": "将redis中的键k的值自增2.5的命令为_____。",
+      "type": 3,
+      "answer": "incrbyfloat k 2.5"
+    },
+    {
+      "title": "在redis中,在键k的内容最后追加aa使用的命令为_____。",
+      "type": 3,
+      "answer": "append k aa"
+    },
+    {
+      "title": "在redis中,获取字符类型的键k的内容的长度使用的命令为_____。",
+      "type": 3,
+      "answer": "strlen k"
+    },
+    {
+      "title": "在redis中,中文字符对应的长度为_____。",
+      "type": 3,
+      "answer": "3"
+    },
+    {
+      "title": "在redis中,同时将键k1的值设置为a1,键k2的值设置a2的命令为_____。",
+      "type": 3,
+      "answer": "mset k1 a1 k2 a2"
+    },
+    {
+      "title": "在redis中,一次同时获得键k1，k2的值的命令为_____。",
+      "type": 3,
+      "answer": "mget k1 k2"
+    },
+    {
+      "title": "在redis中,将对象{a:1,b:2}创建为散列表(键k)的命令为_____。",
+      "type": 3,
+      "answer": "hmset k a 1 b 2"
+    },
+    {
+      "title": "在redis中,散列表k存储了对象{a:1,b:2,c:3}，同时获取a，b字段的命令为_____。",
+      "type": 3,
+      "answer": "hmget k a b"
+    },
+    {
+      "title": "在redis中,一次获取散列表k存储的所有字段值的命令为_____。",
+      "type": 3,
+      "answer": "hgetall k"
+    },
+    {
+      "title": "在redis中,判断散列表k是否存在字段a的命令为_____。",
+      "type": 3,
+      "answer": "hexists k a"
+    },
+    {
+      "title": "在redis中,若散列表k不存在字段a则将a的值设置为1，若存在则不处理的命令为_____。",
+      "type": 3,
+      "answer": "hsetnx k a 1"
+    },
+    {
+      "title": "在redis中,将散列表k的字段a值自增的命令为_____。",
+      "type": 3,
+      "answer": "hincrby k a 1"
+    },
+    {
+      "title": "在redis中,将散列表k的字段a,b删除的命令为_____。",
+      "type": 3,
+      "answer": "hdel k a b"
+    },
+    {
+      "title": "在redis中,获取散列表k所有的字段的命令为_____。",
+      "type": 3,
+      "answer": "hkeys k"
+    },
+    {
+      "title": "在redis中,获取散列表k所有的值的命令为_____。",
+      "type": 3,
+      "answer": "hvals k"
+    },
+    {
+      "title": "在redis中,获取散列表k的字段总数的命令为_____。",
+      "type": 3,
+      "answer": "hlen k"
+    },
+    {
+      "title": "在redis中,向列表k的头部添加的元素1的命令为_____。",
+      "type": 3,
+      "answer": "lpush k 1"
+    },
+    {
+      "title": "在redis中,向列表k的尾部添加的元素1的命令为_____。",
+      "type": 3,
+      "answer": "rpush k 1"
+    },
+    {
+      "title": "在redis中,从列表k的头部取出一个元素的命令为_____。",
+      "type": 3,
+      "answer": "lpop k"
+    },
+    {
+      "title": "在redis中,获取列表k元素个数的命令为_____。",
+      "type": 3,
+      "answer": "llen k"
+    },
+    {
+      "title": "在redis中,获取列表前10个元素的命令为_____。",
+      "type": 3,
+      "answer": "lrange 0 9"
+    },
+    {
+      "title": "在redis中,获取列表最后10个元素的命令为_____。",
+      "type": 3,
+      "answer": "lrange -10 -1"
+    },
+    {
+      "title": "在redis中,获取列表所有元素的命令为_____。",
+      "type": 3,
+      "answer": "lrange 0 -1"
+    },
+    {
+      "title": "在redis中,删除列表k中前3个值为1的命令为_____。",
+      "type": 3,
+      "answer": "lrem k 3 1"
+    },
+    {
+      "title": "在redis中,删除列表k中最后3个值为1的命令为_____。",
+      "type": 3,
+      "answer": "lrem k -3 1"
+    },
+    {
+      "title": "在redis中,删除列表k中所有值为1的命令为_____。",
+      "type": 3,
+      "answer": "lrem k 0 1"
+    },
+    {
+      "title": "在redis中,获取列表k中的第二个元素的值的命令为_____。",
+      "type": 3,
+      "answer": "lindex k 1"
+    },
+    {
+      "title": "在redis中,设置列表k中的第二个元素的值为1的命令为_____。",
+      "type": 3,
+      "answer": "lset k 1 1"
+    },
+    {
+      "title": "在redis中,获取列表k中的倒数第二个元素的值的命令为_____。",
+      "type": 3,
+      "answer": "lindex k -2"
+    },
+    {
+      "title": "在redis中,限制列表k中元素个数不超过100（多余删除）的命令为_____。",
+      "type": 3,
+      "answer": "ltrim k 0 99"
+    },
+    {
+      "title": "一个列表类型键最多能容纳_____个元素。",
+      "type": 3,
+      "answer": "2^32-1"
+    },
+    {
+      "title": "已知列表k的数据为1、7、9, 在7和9直接 插入0的命令为_____。",
+      "type": 3,
+      "answer": "linsert k after 7 0"
+    },{
+      "title": "创建一个set集合k,包含元素1 3 5的命令为_____。",
+      "type": 3,
+      "answer": "sadd k 1 3 5"
+    },{
+      "title": "获取set集合k中的所有值得命令为_____。",
+      "type": 3,
+      "answer": "smembers k"
+    },{
+      "title": "判断元素1是否在set集合k中的命令为 _____。",
+      "type": 3,
+      "answer": "sismember k 1"
+    },{
+      "title": "求属于set集合a且不属于set集合b的元素构成的集合的命令_____。",
+      "type": 3,
+      "answer": "sdiff a b"
+    },{
+      "title": "求属于set集合a且属于set集合b的元素构成的集合的命令_____。",
+      "type": 3,
+      "answer": "sinter a b"
+    },{
+      "title": "求属于set集合a或属于set集合b的元素构成的集合的命令_____。",
+      "type": 3,
+      "answer": "sunion a b"
+    },{
+      "title": "获得set集合a中元素个数命令为_____。",
+      "type": 3,
+      "answer": "scard a"
+    },{
+      "title":"创建一个有序集合k，并添加a(得分1)，b(得分2)，c(得分3)的命令为____。",
+      "type": 3,
+      "answer": "zadd k 1 a 2 b 3 c"
+    },{
+      "title":"获取有序集合k中成员a的得分的命令为____。",
+      "type": 3,
+      "answer": "zscore k a"
+    },{
+      "title":"获取有序集合k得分前10低的元素的命令为____。",
+      "type": 3,
+      "answer": "zrange k 0 9"
+    },{
+      "title":"获取有序集合k得分前5低的元素和得分的命令为____。",
+      "type": 3,
+      "answer": "zrange k 0 4 withscores"
+    },{
+      "title":"获取有序集合k得分前5高的元素和得分，并按得分从高到低排列的命令为____。",
+      "type": 3,
+      "answer": "zrevrange k 0 4 withscores"
+    },{
+      "title":"获取有序集合k中前3个得分大于等于20，小于50的元素和得分的命令为____。",
+      "type": 3,
+      "answer": "zrangebyscore k 20 （50 withscores limit 0 3"
+    }
+     
+  ]
+}
