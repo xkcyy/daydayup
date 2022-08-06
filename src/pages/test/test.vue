@@ -1,6 +1,7 @@
 <template>
   <view class="container" v-if="dataSource.length">
-    <DSwiper3 :list="dataSource">
+    <DSwiper ref="refSwiper" v-model:current="current" @animationfinish="handleAnimationfinish" :dataSource="dataSource"
+      @chagne="handleChange">
       <template #default="context">
         <scroll-view scroll-y="true" class="swiper-scroll">
           <view class="topic-content">
@@ -11,11 +12,13 @@
                 <text>{{ context.index + 1 }}. {{ context.item.title }}</text>
               </view>
               <view class="answer-input">
-                <view v-if="context.index % 2">
-                  <uni-easyInput :disabled="context.item.filled" v-model="context.item.answerResult" placeholder=""
+                <!-- <view v-if="context.index % 2">
+                  <uni-easyInput :focus="focusSource[context.index]" @blur="handleBlur(context.index)"
+                    :disabled="context.item.filled" v-model="context.item.answerResult" placeholder=""
                     @confirm="handleInputConfirm(context.item, context.index)" />
-                </view>
-                <uni-easyInput v-else :disabled="context.item.filled" v-model="context.item.answerResult" placeholder=""
+                </view> -->
+                <uni-easyInput :focus="focusSource[context.index]" @blur="handleBlur(context.index)"
+                  :disabled="context.item.filled" v-model="context.item.answerResult" placeholder=""
                   @confirm="handleInputConfirm(context.item, context.index)" />
               </view>
               <view v-if="context.item.filled">
@@ -42,8 +45,8 @@
           </view>
         </scroll-view>
       </template>
-    </DSwiper3>
-    <view class="panel-bottom">
+    </DSwiper>
+    <view class="panel-bottom" ref="bottomRef">
       <view class="count-result">
         <view class="item">
           <uni-icons type="checkbox-filled" size="18" color="#0089ff"></uni-icons>
@@ -55,19 +58,92 @@
         <view class="item error-num" style="padding-left: 10rpx;">{{ countResult.error }}</view>
       </view>
     </view>
+    <uni-popup ref="refPopupTestResult" background-color="#fff">
+      <view>
+        <uni-card>
+          <!-- <image slot='cover' style="width: 100%;" :src="cover"></image> -->
+          <view class="uni-body">
+            <view class="count-result">
+              <view class="item">
+                <uni-icons type="checkbox-filled" size="18" color="#0089ff"></uni-icons>
+              </view>
+              <view class="item success-num" style="padding-left: 10rpx;margin-right: 30rpx;">{{ countResult.success }}
+              </view>
+              <view class="item">
+                <uni-icons type="clear" size="18" color="#f84d27"></uni-icons>
+              </view>
+              <view class="item error-num" style="padding-left: 10rpx;">{{ countResult.error }}</view>
+            </view>
+            <view></view>
+          </view>
+          <view slot="actions" class="card-actions">
+            <view class="card-actions-item">
+              <uni-icons type="pengyouquan" size="18" color="#999"></uni-icons>
+              <text class="card-actions-item-text">分享</text>
+            </view>
+            <view class="card-actions-item">
+              <uni-icons type="chatbubble" size="18" color="#999"></uni-icons>
+              <text class="card-actions-item-text">评论</text>
+            </view>
+          </view>
+        </uni-card>
+      </view>
+    </uni-popup>
   </view>
 </template>
 <script lang="ts" setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, getCurrentInstance, onMounted, ref } from "vue";
 import DSwiper from "../../components/d-swiper/d-swiper.vue";
 import DSwiper3 from '../../components/d-swiper/d-swiper3.vue'
 import { fetchQuestions, TestingQuestion } from "./api";
-const dataSource = ref(new Array<TestingQuestion>());
-const current = ref(0);
+import { fetchSubjectRandom, updateSujectScores } from '../../services/score'
 
-function handleChange(e: any) {
+
+const dataSource = ref(new Array<TestingQuestion>());
+const focusSource = ref(new Array<Boolean>);
+const current = ref(0);
+const refSwiper = ref({} as any)
+const refPopupTestResult = ref(null as any)
+const bottomRef = ref({} as any)
+
+function handleBlur(index: number) {
+  focusSource.value[index] = false
+  console.log('blur')
+}
+
+function handleChange(index: number) {
+  current.value = index
   uni.setNavigationBarTitle({
-    title: current.value + 1 + '/' + dataSource.value.length
+    title: index + 1 + '/' + dataSource.value.length
+  })
+  for (let i = 0; i < dataSource.value.length; i++) {
+    focusSource.value[i] = false;
+  }
+  focusSource.value[index] = true
+}
+
+function submit() {
+  const topics = dataSource.value.map(x => {
+    return {
+      index: parseInt(x.id as string),
+      success: x.answerCorrect || false
+    }
+  })
+  updateSujectScores('redis', topics)
+
+  const score = Math.round(countResult.value.success * 100 / dataSource.value.length)
+
+  uni.showModal({
+    content: score + '分',
+    cancelText: "关闭",
+    confirmText: '再来一次',
+    success: function () {
+      // 
+      uni.navigateBack()
+    },
+    fail: function () {
+      uni.navigateBack()
+    }
   })
 }
 
@@ -76,30 +152,16 @@ onMounted(() => {
   const route = routes[routes.length - 1] as any
   const url = decodeURIComponent((route.options || route.$page.options).url as string)
 
-  // const url = ((route as any).$page.options as any).url as string;
   uni.showLoading({ title: '加载中...' })
-  uni.request({
-    url: url,
-    success: (res: any) => {
-
-      const arr = res.data.questions as Array<TestingQuestion>
-      for (let i = 0; i < arr.length; i++) {
-        const idx = Math.ceil((Math.random() * (arr.length - i))) % (arr.length - i) + i
-        // 交换i与idx
-        const newValue = arr[idx]
-        arr[idx] = arr[i]
-        arr[i] = newValue;
-        newValue.id = 100 + i;
-      }
-      dataSource.value = arr
-      uni.hideLoading()
-      handleChange(null)
-    }, fail: () => {
-      uni.hideLoading()
-    }
+  fetchSubjectRandom({ url, name: 'redis', random: true, top: 10 }).then(res => {
+    dataSource.value = res as any as Array<TestingQuestion>
+    focusSource.value = res.map(x => false)
+    focusSource.value[0] = true
+  }).finally(() => {
+    uni.hideLoading()
   })
-
 })
+
 function handleInputConfirm(question: TestingQuestion, index: number) {
   question.filled = true
   if (question.type == 3) {
@@ -118,7 +180,27 @@ function handleInputConfirm(question: TestingQuestion, index: number) {
       .sort()
       .join(',')
     question.answerCorrect = an == ipt
+
   }
+
+  console.log(current.value)
+  if (current.value == focusSource.value.length - 1) {
+    // 结束
+    submit()
+  } else if (question.answerCorrect) {
+    //正确下一个
+    setTimeout(() => {
+      current.value += 1
+    }, 300);
+  }
+
+}
+
+function handleAnimationfinish() {
+  for (let i = 0; i < dataSource.value.length; i++) {
+    focusSource.value[i] = false;
+  }
+  focusSource.value[current.value] = true
 }
 
 const countResult = computed(() => {
@@ -135,6 +217,8 @@ const countResult = computed(() => {
     error
   }
 })
+
+
 </script>
 <style lang="less">
 page {

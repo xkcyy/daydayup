@@ -59,7 +59,7 @@ const subjects = [
     title: "Redis",
     img: "https://atts.w3cschool.cn/attachments/cover/cover_redis.png?imageView2/1/w/64/h/64&t=1542113432",
     desc: "一个高性能的key-value数据库。",
-    url: "https://xkcyy.github.io/daydayup/dist/build/h5/static/tests/redis.json",
+    url: "https://xkcyy.github.io/daydayup/src/static/tests/redis.json",
   }
 ];
 

@@ -292,7 +292,83 @@
       "title":"获取有序集合k中前3个得分大于等于20，小于50的元素和得分的命令为____。",
       "type": 3,
       "answer": "zrangebyscore k 20 （50 withscores limit 0 3"
+    },{
+      "title":"将有序集合k中的元素a的得分减少4的命令为____。",
+      "type": 3,
+      "answer": "zincrby k -4 a"
+    },
+    {
+      "title":"获取有序集合k中元素的数量的命令为____。",
+      "type":3,
+      "answer":"zcard k"
+    },
+    {
+      "title":"获取有序集合k中元素的得分1-9分之间的数量的命令为____。",
+      "type":3,
+      "answer":"zcount k 1 9"
+    },
+    {
+      "title":"删除有序集合k中元素a的命令为____。",
+      "type":3,
+      "answer":"zrem k a"
+    },{
+      "title":"删除有序集合k中得分在5-9分之间的元素的命令为____。",
+      "type":3,
+      "answer":"zremrange k 5 9"
+    },{
+      "title":"删除有序集合k中元素a的得分排名的命令为____。",
+      "type":3,
+      "answer":"zrank k a"
+    },{
+      "title":"redis事务开启的命令为____。",
+      "type":3,
+      "answer":"multi"
+    },{
+      "title":"redis事务提交的命令为____。",
+      "type":3,
+      "answer":"exec"
+    },{
+      "title":"redis事务中存在存在语法错误时，事务会继续执行吗?(y/n)____。",
+      "type":3,
+      "answer":"y"
+    },{
+      "title":"redis中表示无穷大的字符是____。",
+      "type":3,
+      "answer":"inf"
+    },{
+      "title":"redis中设置键k的过期时间为5s的命令为____。",
+      "type":3,
+      "answer":"expire k 5"
+    },{
+      "title":"redis中获取键k的过期时间的命令为____。",
+      "type":3,
+      "answer":"ttl k"
+    },{
+      "title":"redis中清除键k的过期时间的命令为____。",
+      "type":3,
+      "answer":"persist k"
+    },{
+      "title":"redis中除了persist还有什么命令也会清除过期时间____。",
+      "type":3,
+      "answer":"set"
+    },{
+      "title":"redis配置内存最大值的配置参数为____。",
+      "type":3,
+      "answer":"maxmemory"
+    },{
+      "title":"redis默认的缓存淘汰策略是____。",
+      "type":3,
+      "answer":"noeviction"
+    },{
+      "title":"redis缓存淘汰策略中，根据RLU算法删除设置过期时间的key的策略是____。",
+      "type":3,
+      "answer":"volatile-lru"
     }
+
+
+
+
+
      
   ]
 }

@@ -20,7 +20,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         title: "Redis",
         img: "https://atts.w3cschool.cn/attachments/cover/cover_redis.png?imageView2/1/w/64/h/64&t=1542113432",
         desc: "\u4E00\u4E2A\u9AD8\u6027\u80FD\u7684key-value\u6570\u636E\u5E93\u3002",
-        url: "https://xkcyy.github.io/daydayup/dist/build/h5/static/tests/redis.json"
+        url: "https://xkcyy.github.io/daydayup/src/static/tests/redis.json"
       }
     ];
     return (_ctx, _cache) => {

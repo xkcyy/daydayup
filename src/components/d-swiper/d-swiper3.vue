@@ -9,7 +9,7 @@
             <slot v-if="list[swiperList[index]]" :item="list[swiperList[index]]" :index="swiperList[index]"></slot>
             <text>{{ test(index) }}</text>
         </swiper-item>
-         <text>{{ test(-1) }}</text>
+        <text>{{ test(-1) }}</text>
     </swiper>
 
 </template>
@@ -93,7 +93,10 @@ const refSwiper = ref(null);
 const { dataLength, swiperCurrent, swiperList, current, touchStartObj, disableTouch } = toRefs(params)
 const { touchStart, touchMove, touchEnd } = useTouchMove(params, props)
 const goPrevious = () => { if (current.value > 0) swiperCurrent.value = (3 + swiperCurrent.value - 1) % 3 }
-const goNext = () => { if (current.value < dataLength.value - 1) swiperCurrent.value = (swiperCurrent.value + 1) % 3 }
+const goNext = () => {
+    if (current.value < dataLength.value - 1) 
+        swiperCurrent.value = (swiperCurrent.value + 1) % 3
+}
 
 const animationfinish = (e: any) => emits('animationfinish', e)
 const transition = (e: any) => emits('transition', e)
@@ -198,6 +201,7 @@ watch(() => props.list, () => {
     }
 }, { immediate: true })
 
+defineExpose({ goNext, goPrevious })
 </script>
 <style scoped>
 .swiper {

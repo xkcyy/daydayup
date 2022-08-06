@@ -4,90 +4,98 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   props: {
     dataSource: { type: Array, required: true },
     current: { type: Number, default: 0 },
-    renderSize: { type: Number, default: 3 }
+    renderSize: { type: Number, default: 3 },
+    vertical: { type: Boolean, default: false },
+    circular: { type: Boolean, default: false }
   },
-  emits: ["update:current", "change"],
+  emits: ["update:current", "change", "animationfinish"],
   setup(__props, { emit: emits }) {
     const props = __props;
-    const outIndex = common_vendor.ref(0);
-    const duration = common_vendor.ref(2e3);
+    const dataSourceLength = common_vendor.computed$1(() => props.dataSource.length);
+    const duration = common_vendor.ref(300);
+    const disableTouch = common_vendor.ref(false);
+    const innerSwiperLength = 3;
+    const innerSwiperIndexList = common_vendor.ref([]);
     const innerSwiperIndex = common_vendor.ref(0);
-    const innerSwiperList = common_vendor.ref([]);
-    const isSwiperChanging = common_vendor.ref(false);
-    const innerSwiperRangeStartIndex = common_vendor.ref(0);
-    const test = function(item, idx) {
-      console.log("reding item ...", item, idx);
-    };
-    const renderSwiper = (index) => {
-      console.log("renderSwiper", index);
-      const list = new Array();
-      let current = 0;
-      let size = props.renderSize || 5;
-      if (size < 3)
-        size = 3;
-      let start = index - Math.floor(size / 2);
-      let end = start + size;
-      for (let idx = start; idx < end; idx++) {
-        if (props.dataSource[idx]) {
-          list.push(props.dataSource[idx]);
-          if (idx < index) {
-            current++;
-          }
+    const touchStartObj = common_vendor.reactive({ pageX: 0, pageY: 0 });
+    const currentIndex = common_vendor.computed$1(() => innerSwiperIndexList.value[innerSwiperIndex.value]);
+    common_vendor.watch(() => props.dataSource, () => {
+      innerSwiperIndexList.value = [innerSwiperIndex.value = 0, 1, props.dataSource.length - 1];
+    }, { immediate: true });
+    common_vendor.watch(() => props.current, () => {
+      if (props.current !== currentIndex.value) {
+        const nextIdx = props.current > currentIndex.value ? (innerSwiperIndex.value + 1) % innerSwiperLength : (innerSwiperIndex.value - 1 + innerSwiperLength) % innerSwiperLength;
+        innerSwiperIndex.value = nextIdx;
+        if (nextIdx != props.current) {
+          innerSwiperIndexList.value[nextIdx] = props.current;
         }
+        updateInnerSwiperIndexList(nextIdx);
       }
-      setTimeout(() => {
-        duration.value = 0;
-        innerSwiperList.value = list;
-        innerSwiperIndex.value = current;
-        innerSwiperRangeStartIndex.value = index - current;
-        console.log("cur page will be ", list[current]);
-      }, 2e3);
-    };
-    common_vendor.watchEffect(() => {
-      props.dataSource;
-      renderSwiper(0);
     });
+    const updateInnerSwiperIndexList = function(index) {
+      const dateLen = props.dataSource.length;
+      if (index >= 0 && index < 3) {
+        innerSwiperIndexList.value[(index + 1) % 3] = (innerSwiperIndexList.value[index] + 1) % dateLen;
+        innerSwiperIndexList.value[(index + 3 - 1) % 3] = (innerSwiperIndexList.value[index] + dateLen - 1) % dateLen;
+      }
+    };
     const handleSwiperChange = function(e) {
-      if (e.detail.source != "touch")
-        return;
-      isSwiperChanging.value = true;
       let cur = e.detail.current;
-      const outIdx = props.current + cur - innerSwiperIndex.value;
+      const outIdx = innerSwiperIndexList.value[cur];
+      updateInnerSwiperIndexList(cur);
       emits("update:current", outIdx);
       innerSwiperIndex.value = cur;
-      outIndex.value = outIdx;
       emits("change", outIdx);
     };
-    const handleSwiperAnimationFinish = function() {
-      if (!isSwiperChanging.value)
+    const handleTouchStart = function(e) {
+      const item = e.changedTouches[0];
+      touchStartObj.pageX = item.pageX;
+      touchStartObj.pageY = item.pageY;
+    };
+    const handleTouchMove = function(e) {
+      console.log(currentIndex.value);
+      if (props.circular)
         return;
-      isSwiperChanging.value = false;
-      setTimeout(() => {
-        console.log(props.current);
-        renderSwiper(props.current);
-      }, 10);
+      var targetPos = e.changedTouches[0];
+      var vertical = props.vertical;
+      var preDir = vertical ? targetPos.pageY > touchStartObj.pageY : targetPos.pageX > touchStartObj.pageX;
+      var nextDir = vertical ? targetPos.pageY < touchStartObj.pageY : targetPos.pageX < touchStartObj.pageX;
+      if (currentIndex.value == 0 && preDir) {
+        disableTouch.value = true;
+        e && e.stopPropagation && e.stopPropagation();
+        return false;
+      } else if (currentIndex.value == dataSourceLength.value - 1 && nextDir) {
+        disableTouch.value = true;
+        e && e.stopPropagation && e.stopPropagation();
+        return false;
+      }
+    };
+    const handleTouchEnd = function() {
+      disableTouch.value = false;
+    };
+    const handleAnimationfinish = function() {
+      emits("animationfinish");
     };
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.f(innerSwiperList.value, (item, index, i0) => {
+        a: common_vendor.f(3, (item, index, i0) => {
           return {
             a: "d-" + i0,
             b: common_vendor.r("d", {
-              context: {
-                item,
-                index: innerSwiperRangeStartIndex.value + index
-              }
+              index: innerSwiperIndexList.value[index],
+              item: __props.dataSource[innerSwiperIndexList.value[index]]
             }, i0),
-            c: common_vendor.t(function() {
-              test(item, index);
-            }()),
-            d: item.id
+            c: index
           };
         }),
-        b: duration.value,
-        c: innerSwiperIndex.value,
-        d: common_vendor.o(handleSwiperChange),
-        e: common_vendor.o(handleSwiperAnimationFinish)
+        b: common_vendor.o(handleTouchStart),
+        c: common_vendor.o(handleTouchMove),
+        d: common_vendor.o(handleTouchEnd),
+        e: duration.value,
+        f: innerSwiperIndex.value,
+        g: disableTouch.value,
+        h: common_vendor.o(handleSwiperChange),
+        i: common_vendor.o(handleAnimationfinish)
       };
     };
   }

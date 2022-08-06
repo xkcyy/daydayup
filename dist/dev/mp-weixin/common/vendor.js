@@ -2028,35 +2028,6 @@ const shallowUnwrapHandlers = {
 function proxyRefs(objectWithRefs) {
   return isReactive(objectWithRefs) ? objectWithRefs : new Proxy(objectWithRefs, shallowUnwrapHandlers);
 }
-function toRefs(object) {
-  if (!isProxy(object)) {
-    console.warn(`toRefs() expects a reactive object but received a plain one.`);
-  }
-  const ret = isArray(object) ? new Array(object.length) : {};
-  for (const key in object) {
-    ret[key] = toRef(object, key);
-  }
-  return ret;
-}
-class ObjectRefImpl {
-  constructor(_object, _key, _defaultValue) {
-    this._object = _object;
-    this._key = _key;
-    this._defaultValue = _defaultValue;
-    this.__v_isRef = true;
-  }
-  get value() {
-    const val = this._object[this._key];
-    return val === void 0 ? this._defaultValue : val;
-  }
-  set value(newVal) {
-    this._object[this._key] = newVal;
-  }
-}
-function toRef(object, key, defaultValue) {
-  const val = object[key];
-  return isRef(val) ? val : new ObjectRefImpl(object, key, defaultValue);
-}
 class ComputedRefImpl {
   constructor(getter, _setter, isReadonly2, isSSR) {
     this._setter = _setter;
@@ -5058,6 +5029,10 @@ function stringify(styles) {
   }
   return ret;
 }
+function setRef(ref2, id, opts = {}) {
+  const { $templateRefs } = getCurrentInstance();
+  $templateRefs.push({ i: id, r: ref2, k: opts.k, f: opts.f });
+}
 const o = (value, key) => vOn(value, key);
 const f = (source, renderItem) => vFor(source, renderItem);
 const r = (name, props, key) => renderSlot(name, props, key);
@@ -5067,6 +5042,7 @@ const e = (target, ...sources) => extend(target, ...sources);
 const n = (value) => normalizeClass(value);
 const t = (val) => toDisplayString(val);
 const p = (props) => renderProps(props);
+const sr = (ref2, id, opts) => setRef(ref2, id, opts);
 function createApp$1(rootComponent, rootProps = null) {
   rootComponent && (rootComponent.mpType = "app");
   return createVueApp(rootComponent, rootProps).use(plugin);
@@ -7001,8 +6977,119 @@ var icons = {
     }
   ]
 };
+class MPAnimation {
+  constructor(options, _this) {
+    this.options = options;
+    this.animation = index.createAnimation(options);
+    this.currentStepAnimates = {};
+    this.next = 0;
+    this.$ = _this;
+  }
+  _nvuePushAnimates(type, args) {
+    let aniObj = this.currentStepAnimates[this.next];
+    let styles = {};
+    if (!aniObj) {
+      styles = {
+        styles: {},
+        config: {}
+      };
+    } else {
+      styles = aniObj;
+    }
+    if (animateTypes1.includes(type)) {
+      if (!styles.styles.transform) {
+        styles.styles.transform = "";
+      }
+      let unit = "";
+      if (type === "rotate") {
+        unit = "deg";
+      }
+      styles.styles.transform += `${type}(${args + unit}) `;
+    } else {
+      styles.styles[type] = `${args}`;
+    }
+    this.currentStepAnimates[this.next] = styles;
+  }
+  _animateRun(styles = {}, config = {}) {
+    let ref2 = this.$.$refs["ani"].ref;
+    if (!ref2)
+      return;
+    return new Promise((resolve2, reject) => {
+      nvueAnimation.transition(ref2, {
+        styles,
+        ...config
+      }, (res) => {
+        resolve2();
+      });
+    });
+  }
+  _nvueNextAnimate(animates, step = 0, fn) {
+    let obj = animates[step];
+    if (obj) {
+      let {
+        styles,
+        config
+      } = obj;
+      this._animateRun(styles, config).then(() => {
+        step += 1;
+        this._nvueNextAnimate(animates, step, fn);
+      });
+    } else {
+      this.currentStepAnimates = {};
+      typeof fn === "function" && fn();
+      this.isEnd = true;
+    }
+  }
+  step(config = {}) {
+    this.animation.step(config);
+    return this;
+  }
+  run(fn) {
+    this.$.animationData = this.animation.export();
+    this.$.timer = setTimeout(() => {
+      typeof fn === "function" && fn();
+    }, this.$.durationTime);
+  }
+}
+const animateTypes1 = [
+  "matrix",
+  "matrix3d",
+  "rotate",
+  "rotate3d",
+  "rotateX",
+  "rotateY",
+  "rotateZ",
+  "scale",
+  "scale3d",
+  "scaleX",
+  "scaleY",
+  "scaleZ",
+  "skew",
+  "skewX",
+  "skewY",
+  "translate",
+  "translate3d",
+  "translateX",
+  "translateY",
+  "translateZ"
+];
+const animateTypes2 = ["opacity", "backgroundColor"];
+const animateTypes3 = ["width", "height", "left", "right", "top", "bottom"];
+animateTypes1.concat(animateTypes2, animateTypes3).forEach((type) => {
+  MPAnimation.prototype[type] = function(...args) {
+    this.animation[type](...args);
+    return this;
+  };
+});
+function createAnimation(option, _this) {
+  if (!_this)
+    return;
+  clearTimeout(_this.timer);
+  return new MPAnimation(option, _this);
+}
 exports._export_sfc = _export_sfc;
 exports.computed$1 = computed$1;
+exports.createAnimation = createAnimation;
 exports.createSSRApp = createSSRApp;
 exports.defineComponent = defineComponent;
 exports.e = e;
@@ -7021,8 +7108,8 @@ exports.reactive = reactive;
 exports.ref = ref;
 exports.resolveComponent = resolveComponent;
 exports.s = s;
+exports.sr = sr;
 exports.t = t;
-exports.toRefs = toRefs;
 exports.unref = unref;
 exports.w = w;
 exports.watch = watch;
