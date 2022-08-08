@@ -94,6 +94,7 @@ const fetchSubjectRandom = async function(option) {
     result.push(pos);
     top--;
   }
+  console.log("\u751F\u6210\u9898\u76EE", { weights, result });
   return result.map((x) => qs[x]);
 };
 const updateSujectScores = function(subject, topis) {

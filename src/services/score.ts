@@ -128,6 +128,7 @@ export const fetchSubjectRandom = async function (option: FetchOption) {
         result.push(pos)
         top--
     }
+    console.log('生成题目',{weights,result})
     return result.map(x => qs[x])
 }
 

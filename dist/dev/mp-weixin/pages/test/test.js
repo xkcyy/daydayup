@@ -126,45 +126,46 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
               type: "primary"
             }),
             d: common_vendor.t(context.index + 1),
-            e: common_vendor.t(context.item.title),
-            f: common_vendor.o(($event) => handleBlur(context.index)),
-            g: common_vendor.o(($event) => handleInputConfirm(context.item, context.index)),
-            h: "2664db0e-2-" + i0 + ",2664db0e-0",
-            i: common_vendor.o(($event) => context.item.answerResult = $event),
-            j: common_vendor.p({
+            e: common_vendor.t(context.item.id + 1),
+            f: common_vendor.t(context.item.title),
+            g: common_vendor.o(($event) => handleBlur(context.index)),
+            h: common_vendor.o(($event) => handleInputConfirm(context.item, context.index)),
+            i: "2664db0e-2-" + i0 + ",2664db0e-0",
+            j: common_vendor.o(($event) => context.item.answerResult = $event),
+            k: common_vendor.p({
               focus: focusSource.value[context.index],
               disabled: context.item.filled,
               placeholder: "",
               modelValue: context.item.answerResult
             }),
-            k: context.item.filled
-          }, context.item.filled ? common_vendor.e({
             l: context.item.filled
           }, context.item.filled ? common_vendor.e({
-            m: !context.item.answerCorrect
+            m: context.item.filled
+          }, context.item.filled ? common_vendor.e({
+            n: !context.item.answerCorrect
           }, !context.item.answerCorrect ? {
-            n: "2664db0e-3-" + i0 + ",2664db0e-0",
-            o: common_vendor.p({
+            o: "2664db0e-3-" + i0 + ",2664db0e-0",
+            p: common_vendor.p({
               type: "clear",
               size: "38",
               color: "#f84d27"
             })
           } : {
-            p: "2664db0e-4-" + i0 + ",2664db0e-0",
-            q: common_vendor.p({
+            q: "2664db0e-4-" + i0 + ",2664db0e-0",
+            r: common_vendor.p({
               type: "checkbox-filled",
               size: "38",
               color: "#18bc37"
             })
           }) : {}, {
-            r: common_vendor.t(context.item.answer)
+            s: common_vendor.t(context.item.answer)
           }) : {}, {
-            s: context.item.filled && context.item.answerResult
+            t: context.item.filled && context.item.answerResult
           }, context.item.filled && context.item.answerResult ? {
-            t: common_vendor.t(context.item.answerDoubt)
+            v: common_vendor.t(context.item.answerDoubt)
           } : {}) : {}, {
-            v: i0,
-            w: s0
+            w: i0,
+            x: s0
           });
         }, {
           name: "d",

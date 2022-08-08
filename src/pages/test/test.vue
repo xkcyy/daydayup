@@ -9,7 +9,7 @@
               <view class="title">
                 <uni-tag size="small" text="填空题" type="primary" style="margin-right: 20rpx;" />
                 <!-- <text class="index">{{index+1}}、</text> -->
-                <text>{{ context.index + 1 }}. {{ context.item.title }}</text>
+                <text>{{ context.index + 1 }}.<text style="font-size: 16rpx;color:#888;">({{(context.item.id + 1)}})</text> {{ context.item.title }}</text>
               </view>
               <view class="answer-input">
                 <!-- <view v-if="context.index % 2">
