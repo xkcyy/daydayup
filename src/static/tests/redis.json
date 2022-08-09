@@ -314,7 +314,7 @@
     },{
       "title":"删除有序集合k中得分在5-9分之间的元素的命令为____。",
       "type":3,
-      "answer":"zremrange k 5 9"
+      "answer":"zremrangebyscores k 5 9"
     },{
       "title":"删除有序集合k中元素a的得分排名的命令为____。",
       "type":3,

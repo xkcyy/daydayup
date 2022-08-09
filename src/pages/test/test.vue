@@ -153,7 +153,7 @@ onMounted(() => {
   const url = decodeURIComponent((route.options || route.$page.options).url as string)
 
   uni.showLoading({ title: '加载中...' })
-  fetchSubjectRandom({ url, name: 'redis', random: true, top: 10 }).then(res => {
+  fetchSubjectRandom({ url, name: 'redis', random: true, top: 20 }).then(res => {
     dataSource.value = res as any as Array<TestingQuestion>
     focusSource.value = res.map(x => false)
     focusSource.value[0] = true

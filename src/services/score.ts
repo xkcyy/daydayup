@@ -99,37 +99,55 @@ interface FetchOption {
 export const fetchSubjectRandom = async function (option: FetchOption) {
     const qs = await fetchSubject(option.url);
     const scors = await getScore(option.name)
-    let totalWeight = 0;
-    const weights = qs.map((x, y) => {
-        const weight = scors.topics[y] ? (10 + scors.topics[y].error * 3 - scors.topics[y].success) : 10
-        totalWeight += weight;
-        return weight;
-    })
 
-    let start = 0;
-    let top = option.top || qs.length
-    if (top > qs.length) top = qs.length
-    const result = []
-    while (top > 0) {
-        let remain = Math.random() * totalWeight
-        let pos = qs.length - 1;
-        for (let i = start; i < qs.length; i++) {
-            remain -= weights[i]
-            if (remain <= 0) {
-                pos = i;
-                break;
-            }
-        }
-        const sw = weights[start]
-        weights[start] = weights[pos]
-        weights[pos] = weights[start]
-        start++
-        totalWeight -= weights[start]
-        result.push(pos)
-        top--
+    let remain = qs.length;
+    while (remain > 0) {
+        const startIdx = qs.length - 1 - remain
+        const v = Math.ceil(Math.random() * (remain))
+        const idx = startIdx + v
+        const s = qs[startIdx]
+        qs[startIdx] = qs[idx]
+        qs[idx] = s
+        remain--
     }
-    console.log('生成题目',{weights,result})
-    return result.map(x => qs[x])
+    return qs.filter((x, y) => y < (option.top || 1000));
+    // for (let i = 0; i < qs.length; i++) {
+    //     //
+    //     Math.random() * totalWeight
+    //     qs[i]
+
+    // }
+
+    // const weights = qs.map((x, y) => {
+    //     const weight = scors.topics[y] ? (10 + scors.topics[y].error * 3 - scors.topics[y].success) : 10
+    //     totalWeight += weight;
+    //     return weight;
+    // })
+
+    // let start = 0;
+    // let top = option.top || qs.length
+    // if (top > qs.length) top = qs.length
+    // const result = []
+    // while (top > 0) {
+    //     let remain = Math.random() * totalWeight
+    //     let pos = qs.length - 1;
+    //     for (let i = start; i < qs.length; i++) {
+    //         remain -= weights[i]
+    //         if (remain <= 0) {
+    //             pos = i;
+    //             break;
+    //         }
+    //     }
+    //     const sw = weights[start]
+    //     weights[start] = weights[pos]
+    //     weights[pos] = weights[start]
+    //     start++
+    //     totalWeight -= weights[start]
+    //     result.push(pos)
+    //     top--
+    // }
+    // console.log('生成题目', { weights, result })
+    // return result.map(x => qs[x])
 }
 
 export const updateSujectScores = function (subject: string, topis: Array<{ index: number, success: boolean }>) {
